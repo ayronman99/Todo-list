@@ -1,0 +1,46 @@
+/*font-family: 'Rubik', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Rubik:wght@300&display=swap');
+
+.todo-submitter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    background: rgb(14,194,164);
+    background: linear-gradient(90deg, rgba(14,194,164,0.9515011547344111) 22%, rgba(15,230,177,0.8175519630484989) 57%, rgba(22,186,196,1) 78%);
+}
+
+
+.todo-submitter {
+    font-family: 'Rubik', sans-serif;
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .todo-submitter label {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+  .todo-submitter input {
+    flex-grow: 1;
+    border: none;
+    background: #f7f1f1;
+    padding: 0 1.5em;
+    font-size: initial;
+    outline: none;
+  }
+  
+  .todo-submitter button:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .todo-submitter input,
+  .todo-submitter button {
+    font-family: "Quicksand", sans-serif;
+    height: 3rem;
+  }
+  

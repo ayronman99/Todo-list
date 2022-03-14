@@ -1,0 +1,119 @@
+
+/*font-family: 'League Gothic', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+/*font-family: 'Rubik', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Rubik:wght@300&display=swap');
+/*font-family: 'Smooch Sans', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100&display=swap');
+
+
+.todo-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    font-family: 'Rubik', sans-serif;
+}
+
+.todo-pseudo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2em;
+    border: 2px solid teal;
+    max-width: 35em;
+    height:auto;
+    background-color: #3498db;
+    -webkit-box-shadow: 21px 23px 11px -2px rgba(112,105,117,1);
+    -moz-box-shadow: 21px 23px 11px -2px rgba(112,105,117,1);
+    box-shadow: 21px 23px 11px -2px rgba(112,105,117,1);
+}
+
+.todo-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    background: rgb(14,101,194);
+    background: linear-gradient(90deg, rgba(14,101,194,0.9515011547344111) 22%, rgba(15,139,230,0.8175519630484989) 57%, rgb(47, 136, 151) 78%);
+    margin: 0 -3rem 4px;
+    padding: .95rem 2.5rem;
+    width: 90%;
+    cursor: pointer;
+}
+.todo-task{
+    position: relative;
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: 'Smooch Sans', sans-serif;
+    padding-left: 8px;
+    color:rgb(241, 227, 227);
+}
+.todo-utils{
+    display: flex;
+    justify-content: space-between;
+    width: 2.5em;
+    font-size: 1.4em;
+}
+
+.todo-utils i {
+    color: rgb(228, 183, 101);
+}
+
+.top-header{
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: .89em;
+    color:rgb(201, 201, 177);
+}
+
+.top-header h1{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.Todo-edit-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .Todo-edit-form label {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+  .Todo-edit-form input {
+    flex-grow: 1;
+    border: none;
+    background: #f7f1f1;
+    padding: 0 1.5em;
+    font-size: initial;
+  }
+
+
+#todo {
+    margin: 4px;
+}
+
+.todo-task.done{
+    opacity: 0.6;
+    list-style: none;
+}
+
+.todo-task.done:before{
+    content:'';
+    position: absolute;
+    top:50%;
+    left: -0.5rem;
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    animation: strikeitem .5s ease-out 0s forwards;
+    transition: .9s ease-out;
+}
+
+@keyframes strikeitem {
+    to {
+        width: calc(100% + 1rem);
+    }
+}
