@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { Modal, Button } from "react-bootstrap";
+
 
 class TodoItems extends Component {
     constructor(props){
@@ -6,18 +8,36 @@ class TodoItems extends Component {
         this.state = {
             isEditing: false,
             task: this.props.doThis,
-            isDone: false
+            isDone: false,
+            isSureDone: false
         }
         this.editTodo = this.editTodo.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.doneTask = this.doneTask.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
-
+/* All functions for the component section */
     doneTask(){
         this.setState({
-            isDone: true
+            isDone: true,
+            isDoneTask: false
         })
+    }
+
+    handleShow(){
+        this.setState({
+            isDoneTask: true
+        })
+    }
+
+    handleClose(){
+        this.setState({ isDoneTask: false })
+    }
+
+    handleClose(){
+        this.setState({ isDoneTask: false })
     }
 
     handleChange(e){
@@ -35,10 +55,14 @@ class TodoItems extends Component {
         this.props.toDoEdit(this.props.todoID, this.state.task)
         this.setState({isEditing: false})
     }
+/* All functions for the component section above
 
+
+ Render is found below
+*/
     render(){
         const {doThis, removeToDo} = this.props;
-        const {isDone} = this.state;
+        const {isDone, isSureDone} = this.state;
         let todoData;
         if(this.state.isEditing){
             todoData = (
@@ -58,8 +82,28 @@ class TodoItems extends Component {
             todoData = (
                 <div className="todo-item">
                  {isDone && <span style={{margin:`${5}px`, fontSize:`${1.25}em`}}>✔️</span>}
-                <li className={isDone ? 'todo-task done' : "todo-task"} onClick={this.doneTask}>{doThis}</li>
-               
+                <li className={isDone ? 'todo-task done' : "todo-task"} onClick={this.handleShow}>{doThis}</li>
+
+                    <Modal
+                        show={this.state.isDoneTask}
+                        onHide={this.handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                        <Modal.Title>Is the task done?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           Are you sure you have done this task?
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                            Not yet!
+                            </Button>
+                            <Button variant="primary" onClick={this.doneTask}>Indeed, it is done!</Button>
+                        </Modal.Footer>
+                    </Modal>
+                    
 
                  <div className="todo-utils">
                      {!isDone && <a href='#' onClick={this.editTodo}><i className="fa-solid fa-pencil"></i></a>}
