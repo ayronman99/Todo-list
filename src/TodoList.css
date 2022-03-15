@@ -89,6 +89,17 @@
     font-size: initial;
   }
 
+.toolbtn{
+    border-radius: 50%;
+    font-size:1em;
+}
+
+.toolbtn:hover{
+    background-color: rgb(6, 69, 124);
+    color:rgb(89, 221, 41);
+    transition: all 1s ease-in-out;;
+}
+
 
 #todo {
     margin: 4px;
