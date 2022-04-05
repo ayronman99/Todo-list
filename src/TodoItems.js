@@ -36,10 +36,6 @@ class TodoItems extends Component {
         this.setState({ isDoneTask: false })
     }
 
-    handleClose(){
-        this.setState({ isDoneTask: false })
-    }
-
     handleChange(e){
         this.setState({
             task : e.target.value

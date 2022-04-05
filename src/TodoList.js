@@ -8,12 +8,39 @@ class TodoList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            todos: []
+            todos: JSON.parse(localStorage.getItem("todos") || "[]")
         }
         this.toDo = this.toDo.bind(this);
         this.editor = this.editor.bind(this);
         this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
     }
+    componentDidMount() {
+        // add event listener to save state to localStorage
+        // when user leaves/refreshes the page
+        window.addEventListener(
+          "beforeunload",
+          this.saveStateToLocalStorage.bind(this)
+        );
+      }
+
+
+    componentWillUnmount() {
+        window.removeEventListener(
+          "beforeunload",
+          this.saveStateToLocalStorage.bind(this)
+        );
+    
+        // saves if component has a chance to unmount
+        this.saveStateToLocalStorage();
+      }
+
+    saveStateToLocalStorage() {
+        // for every item in React state
+        for (let key in this.state) {
+          // save to localStorage
+          localStorage.setItem('todos', JSON.stringify(this.state[key]));
+        }
+      }
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -22,7 +49,8 @@ class TodoList extends Component {
     toDo(todo){
         this.setState(currState => ({
             todos : [...currState.todos, todo]
-        }))
+        })  
+        )
     }
 
     editor(id, updateTask){
@@ -51,8 +79,8 @@ class TodoList extends Component {
              toDoEdit={this.editor}
              />
         ))
-      
-  
+
+
         return(
             <div className="todo-container">
                <div className="todo-pseudo-container">
@@ -72,7 +100,7 @@ class TodoList extends Component {
                </OverlayTrigger>
                </div>
                {this.state.todos < 1 ? <h2>No Tasks yet! Add one!</h2> : todoMapping}
-                <TodoForm addToDo={this.toDo}/>
+                <TodoForm addToDo={this.toDo} todoArr={this.state.todos}/>
                </div>
             </div>
         )
