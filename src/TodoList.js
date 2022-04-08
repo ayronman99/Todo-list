@@ -12,8 +12,11 @@ class TodoList extends Component {
         }
         this.toDo = this.toDo.bind(this);
         this.editor = this.editor.bind(this);
+        this.taskUpdater = this.taskUpdater.bind(this);
         this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
     }
+
+
     componentDidMount() {
         // add event listener to save state to localStorage
         // when user leaves/refreshes the page
@@ -29,15 +32,16 @@ class TodoList extends Component {
           "beforeunload",
           this.saveStateToLocalStorage.bind(this)
         );
-    
+       
         // saves if component has a chance to unmount
+        
         this.saveStateToLocalStorage();
       }
 
     saveStateToLocalStorage() {
         // for every item in React state
         for (let key in this.state) {
-          // save to localStorage
+          // save to localStorage please undo to "todos" after dev mode
           localStorage.setItem('todos', JSON.stringify(this.state[key]));
         }
       }
@@ -63,6 +67,17 @@ class TodoList extends Component {
         this.setState({todos: updateTodos})
     }
 
+    taskUpdater(id, endTask){
+        const updateTaskStatus = this.state.todos.map(todo => {
+            if(todo.id === id){
+                return {...todo, isDone: endTask}
+            }
+            return todo;
+        })
+      this.setState({todos: updateTaskStatus})
+    }
+
+
     remover(id){
         this.setState({
             todos: this.state.todos.filter(todo => todo.id !== id)
@@ -77,9 +92,10 @@ class TodoList extends Component {
              todoID={doThat.id}
              removeToDo={() => this.remover(doThat.id)}
              toDoEdit={this.editor}
+             taskStatus={doThat.isDone}
+             isTaskUpdated={this.taskUpdater}
              />
         ))
-
 
         return(
             <div className="todo-container">
@@ -100,7 +116,7 @@ class TodoList extends Component {
                </OverlayTrigger>
                </div>
                {this.state.todos < 1 ? <h2>No Tasks yet! Add one!</h2> : todoMapping}
-                <TodoForm addToDo={this.toDo} todoArr={this.state.todos}/>
+                <TodoForm addToDo={this.toDo} />
                </div>
             </div>
         )

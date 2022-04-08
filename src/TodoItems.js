@@ -8,8 +8,7 @@ class TodoItems extends Component {
         this.state = {
             isEditing: false,
             task: this.props.doThis,
-            isDone: false,
-            isSureDone: false
+            todoItemDone: this.props.taskStatus
         }
         this.editTodo = this.editTodo.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -19,12 +18,15 @@ class TodoItems extends Component {
         this.handleClose = this.handleClose.bind(this);
     }
 /* All functions for the component section */
+    
     doneTask(){
+        this.props.isTaskUpdated(this.props.todoID, true)
         this.setState({
-            isDone: true,
+            todoItemDone: true,
             isDoneTask: false
         })
     }
+
 
     handleShow(){
         this.setState({
@@ -58,7 +60,7 @@ class TodoItems extends Component {
 */
     render(){
         const {doThis, removeToDo} = this.props;
-        const {isDone, isSureDone} = this.state;
+        const {todoItemDone} = this.state;
         let todoData;
         if(this.state.isEditing){
             todoData = (
@@ -77,8 +79,8 @@ class TodoItems extends Component {
         } else {
             todoData = (
                 <div className="todo-item">
-                 {isDone && <span style={{margin:`${5}px`, fontSize:`${1.25}em`}}>✔️</span>}
-                <li className={isDone ? 'todo-task done' : "todo-task"} onClick={this.handleShow}>{doThis}</li>
+                 {todoItemDone && <span style={{margin:`${5}px`, fontSize:`${1.25}em`}}>✔️</span>}
+                <li className={todoItemDone ? 'todo-task done' : "todo-task"} onClick={this.handleShow}>{doThis}</li>
 
                     <Modal
                         show={this.state.isDoneTask}
@@ -102,7 +104,7 @@ class TodoItems extends Component {
                     
 
                  <div className="todo-utils">
-                     {!isDone && <a href='#' onClick={this.editTodo}><i className="fa-solid fa-pencil"></i></a>}
+                     {!todoItemDone && <a href='#' onClick={this.editTodo}><i className="fa-solid fa-pencil"></i></a>}
                     
                     <a href='#' onClick={removeToDo}><i className="fa-solid fa-circle-minus"></i></a>
                    </div>
