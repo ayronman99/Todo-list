@@ -1,2 +1,2 @@
 # Todo-list
-A simple react to-do list app.
+A simple react to-do list app updated to typescript.
